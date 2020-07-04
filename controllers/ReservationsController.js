@@ -66,15 +66,17 @@ exports.edit = async (req, res) => {
     res.render(`${viewPath}/edit`, {
       pageTitle: reservation,
       formData: reservation,
+      roomTypes: ['single bed', 'double bed', 'queen', 'King']
     });
   } catch (error) {
     req.flash("danger", `There was an error accessing this Reservation: ${error}`);
-    res.redirect("/");
+    res.redirect("/reservations");
   }
 };
 
 exports.update = async (req, res) => {
   try {
+
     const { user: email } = req.session.passport;
     const user = await User.findOne({ email: email });
 
